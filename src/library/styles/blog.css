@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+.custom-blog {
+  @apply space-y-8;
+}
+
+.custom-blog p {
+  @apply text-[#333A47] text-base leading-relaxed tracking-wide;
+}
+
+.custom-blog a {
+  @apply underline font-semibold;
+}
+
+.custom-blog h2 {
+  @apply text-[28px] font-bold;
+}
+
+.custom-blog h3 {
+  @apply text-[24px] font-semibold;
+}
+
+.custom-blog h4 {
+  @apply text-[20px] font-semibold;
+}
+
+.custom-blog h5 {
+  @apply text-[18px];
+}
+
+.custom-blog h6 {
+  @apply text-[16px];
+}
+
+.custom-blog ol {
+  @apply list-decimal space-y-5 pl-8 text-[16px];
+}
+
+.custom-blog ul {
+  @apply list-disc space-y-5 pl-8 text-[16px];
+}
+
+.custom-blog strong {
+  @apply font-semibold text-black;
+}

@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+.public-page {
+  @apply py-6 sm:py-8 md:py-10 lg:py-12 space-y-8;
+}
+
+.public-page strong {
+  @apply text-[#A59000] font-semibold;
+}
+
+.custom-link {
+  @apply text-[#A59000] font-semibold underline;
+}
+
+.public-page h1 {
+  @apply text-[32px] text-[#A59000] font-extrabold;
+}
+
+.public-page h2 {
+  @apply text-[28px] text-[#A59000] font-bold;
+}
+.public-page h3 {
+  @apply text-[24px] text-[#A59000] font-semibold;
+}
+.public-page h4 {
+  @apply text-[20px] text-[#A59000] font-semibold;
+}
+.public-page h5 {
+  @apply text-[18px] text-[#A59000];
+}
+.public-page h6 {
+  @apply text-[16px] text-[#A59000];
+}
+
+.public-page p {
+  @apply text-[#333A47] text-base leading-relaxed tracking-wide;
+}
+
+.public-page ol {
+  @apply text-[#A59000] list-decimal space-y-5 pl-8;
+}
+
+.public-page ol p {
+  @apply ml-1;
+}
+
+.public-page ul {
+  @apply list-disc pl-6 space-y-5 text-[#AF9000];
+}

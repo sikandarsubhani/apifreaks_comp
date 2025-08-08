@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #ffde00;
+  --color-primary-hover: #e8c800;
+  --color-dark-yellow: #a59000;
+  --color-primary-dark: #131313;
+  --color-primary-dark-hover: #393939;
+  --color-soft-white: #fafafa;
+  --color-neutral-gray: #44474c;
+  --color-danger: #de1848;
+  --color-danger-dark: #d3093a;
+
+  --breakpoint-xxs: 360px;
+  --breakpoint-xs: 420px;
+  --breakpoint-s: 640px;
+  --breakpoint-m: 709px;
+  --breakpoint-ml: 768px;
+  --breakpoint-xl: 1062px;
+  --breakpoint-xxl: 1092px;
+  --breakpoint-xxxl: 1339px;
+  --breakpoint-md_lg: 998px;
+}
+
+@utility flex-cc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@utility flex-c {
+  display: flex;
+  align-items: center;
+}
+
+@utility flex-b {
+  display: flex;
+  justify-content: space-between;
+}
+
+@utility flex-cb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@utility block-shadow {
+  @apply shadow-[0px_0px_6px_0px_#a8a8a87d];
+}
+
+@utility link-anim {
+  @apply transition-all duration-150 ease-in-out;
+}
+
+@utility cta-shadow {
+  @apply shadow-[2px_2px_7px_0px_#69696969];
+}
+
+@utility responsive-pad {
+  @apply px-6 xs:px-8 sm:px-12 lg:px-16;
+}
+
+@layer utilities {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-sm text-neutral-gray;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-primary-dark;
+  }
+  input,
+  textarea {
+    @apply text-primary-dark;
+  }
+}
+
+.custom-bullets {
+  @apply list-disc space-y-5 pl-8 text-[16px];
+}
+
+.custom-decimals {
+  @apply space-y-5 list-decimal pl-8 text-[16px];
+}
+
+.custom-alpha {
+  @apply space-y-5 list-[lower-alpha] pl-8 text-[16px];
+}

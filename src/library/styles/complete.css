@@ -1,0 +1,201 @@
+/*
+ * APIFreaks Components - Complete Stylesheet
+ * This file includes all compiled Tailwind utilities and custom styles
+ * Import this file in your app to ensure all styles work properly
+ */
+
+@import 'tailwindcss';
+
+/* Theme Configuration */
+@theme {
+  --color-primary: #ffde00;
+  --color-primary-hover: #e8c800;
+  --color-dark-yellow: #a59000;
+  --color-primary-dark: #131313;
+  --color-primary-dark-hover: #393939;
+  --color-soft-white: #fafafa;
+  --color-neutral-gray: #44474c;
+  --color-danger: #de1848;
+  --color-danger-dark: #d3093a;
+
+  --breakpoint-xxs: 360px;
+  --breakpoint-xs: 420px;
+  --breakpoint-s: 640px;
+  --breakpoint-m: 709px;
+  --breakpoint-ml: 768px;
+  --breakpoint-xl: 1062px;
+  --breakpoint-xxl: 1092px;
+  --breakpoint-xxxl: 1339px;
+  --breakpoint-md_lg: 998px;
+}
+
+/* Custom Utilities */
+@utility flex-cc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@utility flex-c {
+  display: flex;
+  align-items: center;
+}
+
+@utility flex-b {
+  display: flex;
+  justify-content: space-between;
+}
+
+@utility flex-cb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@utility block-shadow {
+  @apply shadow-[0px_0px_6px_0px_#a8a8a87d];
+}
+
+@utility link-anim {
+  @apply transition-all duration-150 ease-in-out;
+}
+
+@utility cta-shadow {
+  @apply shadow-[2px_2px_7px_0px_#69696969];
+}
+
+@utility responsive-pad {
+  @apply px-6 xs:px-8 sm:px-12 lg:px-16;
+}
+
+/* Base Styles */
+@layer utilities {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-sm text-neutral-gray;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-primary-dark;
+  }
+
+  input,
+  textarea {
+    @apply text-primary-dark;
+  }
+}
+
+/* Blog Styles */
+.custom-blog {
+  @apply space-y-8;
+}
+
+.custom-blog p {
+  @apply text-[#333A47] text-base leading-relaxed tracking-wide;
+}
+
+.custom-blog a {
+  @apply underline font-semibold;
+}
+
+.custom-blog h2 {
+  @apply text-[28px] font-bold;
+}
+
+.custom-blog h3 {
+  @apply text-[24px] font-semibold;
+}
+
+.custom-blog h4 {
+  @apply text-[20px] font-semibold;
+}
+
+.custom-blog h5 {
+  @apply text-[18px];
+}
+
+.custom-blog h6 {
+  @apply text-[16px];
+}
+
+.custom-blog ol {
+  @apply list-decimal space-y-5 pl-8 text-[16px];
+}
+
+.custom-blog ul {
+  @apply list-disc space-y-5 pl-8 text-[16px];
+}
+
+.custom-blog strong {
+  @apply font-semibold text-black;
+}
+
+/* Public Pages Styles */
+.public-page {
+  @apply py-6 sm:py-8 md:py-10 lg:py-12 space-y-8;
+}
+
+.public-page strong {
+  @apply text-[#A59000] font-semibold;
+}
+
+.custom-link {
+  @apply text-[#A59000] font-semibold underline;
+}
+
+.public-page h1 {
+  @apply text-[32px] text-[#A59000] font-extrabold;
+}
+
+.public-page h2 {
+  @apply text-[28px] text-[#A59000] font-bold;
+}
+.public-page h3 {
+  @apply text-[24px] text-[#A59000] font-semibold;
+}
+.public-page h4 {
+  @apply text-[20px] text-[#A59000] font-semibold;
+}
+.public-page h5 {
+  @apply text-[18px] text-[#A59000];
+}
+.public-page h6 {
+  @apply text-[16px] text-[#A59000];
+}
+
+.public-page p {
+  @apply text-[#333A47] text-base leading-relaxed tracking-wide;
+}
+
+.public-page ol {
+  @apply text-[#A59000] list-decimal space-y-5 pl-8;
+}
+
+.public-page ol p {
+  @apply ml-1;
+}
+
+.public-page ul {
+  @apply list-disc pl-6 space-y-5 text-[#AF9000];
+}
+
+/* Utility Classes */
+.custom-bullets {
+  @apply list-disc space-y-5 pl-8 text-[16px];
+}
+
+.custom-decimals {
+  @apply space-y-5 list-decimal pl-8 text-[16px];
+}
+
+.custom-alpha {
+  @apply space-y-5 list-[lower-alpha] pl-8 text-[16px];
+}
