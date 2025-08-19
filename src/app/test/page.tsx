@@ -1,5 +1,5 @@
-import Footer from '@/library/components/Footer';
-import ModernFooter from '@/library/components/ModernFooter';
+import Footer from '@/library/components/navigation/Footer';
+import ModernFooter from '@/library/components/navigation/ModernFooter';
 
 export default function TestPage() {
   return (

@@ -1,5 +1,5 @@
 {
-  "name": "@7sikandar/af-footer",
+  "name": "@7sikandar/af-nav",
   "version": "0.1.0",
   "private": false,
   "description": "API Freaks Components",
@@ -42,11 +42,12 @@
     "build:css": "node build-css.mjs",
     "build:package": "tsup && npm run build:css && cp tailwind.config.js dist/",
     "clean": "rimraf dist",
-    "prepublishOnly": "npm run clean && npm run build:package"
+    "prepublishOnly": "npm run clean && npm run build:package && npm pack"
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
+    "fuse.js": "^7.1.0",
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

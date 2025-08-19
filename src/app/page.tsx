@@ -1,4 +1,4 @@
-import Footer from "@/library/components/Footer";
+import Footer from "@/library/components/navigation/Footer";
 export default function Home() {
   return (
     <Footer />

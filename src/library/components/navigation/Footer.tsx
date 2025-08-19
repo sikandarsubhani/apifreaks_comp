@@ -1,8 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FacebookIcon, HeartIcon, LinkedinIcon, TwitterIcon } from './icons/Icon';
+import { FacebookIcon, HeartIcon, LinkedinIcon, TwitterIcon } from '../../icons/Icons';
+import '../../styles/globals.css'; // Ensure global styles are imported
+import { pageUrl } from '../../utils/utils';
+import { PAGE } from '../../utils/constants';
+import { APIDocsUrls, toolsUrls } from '../../utils/navigation-links';
+import NoPrefetchLink from '../common/NoPrefetchLink';
 
-function Footer() {
+type FooterProps = {
+  logoSrc?: string;
+}
+export function Footer({
+  logoSrc = 'src/library/assets/logo-black-bg-small.jpg',
+}: FooterProps) {
   return (
     <>
       <footer className='@container bg-black text-white responsive-pad overflow-hidden'>
@@ -12,7 +22,7 @@ function Footer() {
               Ready to get started?
             </p>
             <Link
-              href='#'
+              href={pageUrl(PAGE.Signup)}
               className='bg-primary text-center py-5 px-10 rounded-full text-black font-medium text-base'
             >
               Sign Up for Free
@@ -24,7 +34,7 @@ function Footer() {
               <div className='flex flex-col justify-center space-y-3'>
                 <Link href='/' className='mx-auto'>
                   <Image
-                    src='/img/logo-black-bg-small.jpg'
+                    src={logoSrc}
                     width={120}
                     height={120}
                     alt='APIFreaks'
@@ -57,39 +67,11 @@ function Footer() {
                     API Catalog
                   </h3>
                   <ul className='space-y-1'>
-                    <li>
-                      <Link href="#">Geolocation APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">WHOIS APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">DNS APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">SSL APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Domain Availability APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Screenshot API</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Currency APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Commodity APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Timezone APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">User Agent APIs</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Other APIs</Link>
-                    </li>
+                    {APIDocsUrls.map(api => (
+                      <li key={api.title}>
+                        <Link href={api.link}>{api.title}</Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div className='text-lg space-y-3'>
@@ -97,25 +79,23 @@ function Footer() {
                     Tools Catalog
                   </h3>
                   <ul className='space-y-1'>
-                    <li>
-                      <Link href="#">Formatters & Beautifiers</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Converters & Optimizers</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Viewers & Validators</Link>
-                    </li>
+                    {toolsUrls.map(api => (
+                      <li key={api.title}>
+                        <NoPrefetchLink href={api.link}>
+                          {api.title}
+                        </NoPrefetchLink>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div className='text-lg space-y-3'>
                   <h3 className='text-primary text-xl font-bold'>Docs</h3>
                   <ul className='space-y-1'>
                     <li>
-                      <Link href='#'>Documentation</Link>
+                      <Link href={pageUrl(PAGE.APIFreaks)}>Documentation</Link>
                     </li>
                     <li>
-                      <Link href='#'>Swagger Docs</Link>
+                      <Link href={pageUrl(PAGE.Swagger)}>Swagger Docs</Link>
                     </li>
                   </ul>
                 </div>
@@ -125,15 +105,15 @@ function Footer() {
                   </h3>
                   <ul className='space-y-1'>
                     <li>
-                      <Link href='#'>
+                      <Link href={pageUrl(PAGE.APIPlansPricingOneOff)}>
                         Pricing
                       </Link>
                     </li>
                     <li>
-                      <Link href='#'>Sign up</Link>
+                      <Link href={pageUrl(PAGE.Signup)}>Sign up</Link>
                     </li>
                     <li>
-                      <Link href='#'>Sign In</Link>
+                      <Link href={pageUrl(PAGE.Login)}>Sign In</Link>
                     </li>
                   </ul>
                 </div>
@@ -142,16 +122,16 @@ function Footer() {
                   <h3 className='text-primary text-xl font-bold'>Company</h3>
                   <ul className='space-y-1'>
                     <li>
-                      <Link href='#'>About Us</Link>
+                      <Link href={pageUrl(PAGE.About)}>About Us</Link>
                     </li>
                     <li>
-                      <Link href='#'>Resources</Link>
+                      <Link href={pageUrl(PAGE.Resources)}>Resources</Link>
                     </li>
                     <li>
-                      <Link href='#'>Terms</Link>
+                      <Link href={pageUrl(PAGE.Terms)}>Terms</Link>
                     </li>
                     <li>
-                      <Link href='#'>Privacy</Link>
+                      <Link href={pageUrl(PAGE.PrivacyPolicy)}>Privacy</Link>
                     </li>
                   </ul>
                 </div>
@@ -170,6 +150,4 @@ function Footer() {
     </>
   );
 }
-
 export default Footer;
-export { Footer };

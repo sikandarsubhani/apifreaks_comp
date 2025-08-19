@@ -6,45 +6,30 @@
  *   <Footer />
  * </div>
  */
-export { default as Footer, Footer as FooterComponent } from "./library/components/Footer";
-
-/**
- * ModernFooter - Uses standard Tailwind responsive classes. Works without container queries.
- * @example
- * <ModernFooter logoSrc="/your-logo.png" logoAlt="Your Company" />
- */
-export { default as ModernFooter, ModernFooter as ModernFooterComponent } from "./library/components/ModernFooter";
+export { default as Footer, Footer as FooterComponent } from "./library/components/navigation/Footer";
+export { default as NotFound } from "./library/components/NotFound";
+export { default as NavbarGlobal } from "./library/components/navigation/NavBarGlobal";
 
 // Icon components (dependencies for Footer)
-export {
-  FacebookIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  HeartIcon,
-  type IconSizeProps
-} from "./library/components/icons/Icon";
+export * from "./library/icons/Icons";
 
-// NoPrefetchLink component (if needed)
-export { default as NoPrefetchLink } from "./library/components/NoPrefetchLink";
 
 // components
 // export { NoPrefetchLink } from "./library/components/common/NoPrefetchLink";
-// export { default as DropDownMenu } from "./library/components/common/DropDownMenu";
-// export { Footer } from "./library/components/navigation/Footer";
+export { default as DropDownMenu } from "./library/components/common/DropDownMenu";
+export { default as NoPrefetchLink } from "./library/components/common/NoPrefetchLink";
 
-
-
-
-// icons
-export * from "./library/components/icons/Icon";
 // utils
-// export * from "./library/utils/navigation-links";
-// export * from "./library/utils/utils";
-// export * from "./library/utils/constants";
-// export * from "./library/utils/ghost-api-clients";
+export * from "./library/utils/navigation-links";
+export * from "./library/utils/utils";
+export * from "./library/utils/constants";
+export * from "./library/utils/ghost-api-clients";
 
 // types
-// export * from "./library/types/types";
+export * from "./library/types/types";
+
+//hooks
+export * from "./library/hooks/hook";
 
 // Styles: Import in your app entry (e.g., layout.tsx or _app.js):
 // import 'af-components/dist/af-components.css';

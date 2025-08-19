@@ -2,9 +2,8 @@
 
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { readFile, writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
-import path from 'path';
 
 const execAsync = promisify(exec);
 
@@ -31,6 +30,7 @@ async function buildCSS() {
     await execAsync('npx postcss src/library/styles/blog.css -o dist/blog.css');
     await execAsync('npx postcss src/library/styles/public-pages.css -o dist/public-pages.css');
 
+
     // Create an index.css that imports the main compiled CSS
     const indexCss = `/* APIFreaks Components - Main Entry Point */
 @import './af-components.css';`;
@@ -43,11 +43,12 @@ async function buildCSS() {
     console.log('  - dist/globals.css (individual)');
     console.log('  - dist/blog.css (individual)');
     console.log('  - dist/public-pages.css (individual)');
+    // console.log('  - dist/swagger.css (individual)');
     console.log('');
     console.log('💡 In your host app, import:');
     console.log('   import "@7sikandar/af-footer/styles"');
     console.log('   // or');
-    console.log('   import "@7sikandar/af-footer/styles/af-components.css"');
+    console.log('   import "@7sikandar/af-footer/styles/globals.css"');
 
   } catch (error) {
     console.error('❌ CSS build failed:', error.message);
