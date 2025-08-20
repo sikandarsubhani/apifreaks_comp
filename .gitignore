@@ -19,7 +19,7 @@
 
 # production
 /build
-/dist
+/dist/*
 # cache
 /.cache
 /.parcel-cache
