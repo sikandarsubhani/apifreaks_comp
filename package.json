@@ -21,9 +21,14 @@
   "style": "dist/af-components.css",
   "exports": {
     ".": {
-      "types": "./dist/exports.d.ts",
-      "import": "./dist/exports.mjs",
-      "require": "./dist/exports.cjs"
+      "types": "./dist/exports-server.d.ts",
+      "import": "./dist/exports-server.mjs",
+      "require": "./dist/exports-server.cjs"
+    },
+    "./client": {
+      "types": "./dist/exports-client.d.ts",
+      "import": "./dist/exports-client.mjs",
+      "require": "./dist/exports-client.cjs"
     },
     "./styles": "./dist/af-components.css",
     "./styles/af-components.css": "./dist/af-components.css",

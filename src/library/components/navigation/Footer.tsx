@@ -7,12 +7,7 @@ import { PAGE } from '../../utils/constants';
 import { APIDocsUrls, toolsUrls } from '../../utils/navigation-links';
 import NoPrefetchLink from '../common/NoPrefetchLink';
 
-type FooterProps = {
-  logoSrc?: string;
-}
-export function Footer({
-  logoSrc = 'src/library/assets/logo-black-bg-small.jpg',
-}: FooterProps) {
+export function Footer() {
   return (
     <>
       <footer className='@container bg-black text-white responsive-pad overflow-hidden'>
@@ -34,7 +29,7 @@ export function Footer({
               <div className='flex flex-col justify-center space-y-3'>
                 <Link href='/' className='mx-auto'>
                   <Image
-                    src={logoSrc}
+                    src='https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-bg-small_uadg5k.jpg'
                     width={120}
                     height={120}
                     alt='APIFreaks'

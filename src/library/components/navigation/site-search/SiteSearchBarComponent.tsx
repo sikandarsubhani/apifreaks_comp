@@ -7,7 +7,8 @@ import {
   productsCategoriesTestPages, SwaggerCatelogue, toolsLinks
 } from '../../../utils/navigation-links';
 import { absoluteUrl, pageUrl } from '../../../utils/utils';
-import SiteSearchBar from './SearchBar';
+// import SiteSearchBar from './SearchBar';
+import { ElementType } from 'react';
 
 //This component is cached by default and can be revalidated whenever the cache is invalidated, by the tags defined, in the environment where it is used.
 const dynamicResourcesPages = unstable_cache(
@@ -19,7 +20,7 @@ const dynamicResourcesPages = unstable_cache(
       order: 'published_at desc',
       filter: [`tag:${tag}`],
     });
-    return posts.map(post => ({
+    return posts.map((post: { slug: string; title?: string; excerpt?: string }) => ({
       path: absoluteUrl(pageUrl(page, { slug: post.slug })),
       title: post.title || '',
       content: post.excerpt || '',
@@ -160,8 +161,10 @@ const toolsPages = toolsLinks.flatMap(section =>
     };
   })
 );
-
-export default async function SiteSearchBarComponent() {
+type SiteSearchBarComponentProps = {
+  SiteSearchBar?: ElementType;
+};
+export default async function SiteSearchBarComponent({ SiteSearchBar }: SiteSearchBarComponentProps) {
   let blogPages: SearchBarPage[] = [];
   let tutorialPages: SearchBarPage[] = [];
   let guidePages: SearchBarPage[] = [];
@@ -205,5 +208,9 @@ export default async function SiteSearchBarComponent() {
     ...(swaggerDocs as Array<SearchBarPage>),
   ];
 
-  return <SiteSearchBar searchablePages={searchablePages} />;
+  return (
+    <>
+      {SiteSearchBar ? <SiteSearchBar searchablePages={searchablePages} /> : null}
+    </>
+  );
 }

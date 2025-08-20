@@ -5,25 +5,39 @@ import {
   toolsUrls,
 } from '../../utils/navigation-links';
 import { pageUrl } from '../../utils/utils';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
-import DropdownMenu from '../common/DropDownMenu';
-import SiteSearchBarComponent from './site-search/SiteSearchBarComponent';
-const MobileNavigationGlobal = dynamic(
-  () => import('./MobileNavigationGlobal')
-);
-type NavBarGlobalProps = {
-  logoSrc?: string;
+
+import type { ElementType } from 'react';
+
+type SiteSearchBarComponentProps = {
+  SiteSearchBar?: ElementType
 };
-function NavBarGlobal({ logoSrc = '/logo-black-yellow-bg.jpg' }: NavBarGlobalProps) {
+
+type NavBarGlobalProps = {
+  // Client components may be passed in by a client-side wrapper.
+  DropdownMenu?: ElementType;
+  MobileNavigation?: ElementType;
+  SiteSearchBarComponent?: ElementType<SiteSearchBarComponentProps>;
+  // Optional client SearchBar implementation passed through to the
+  // SiteSearchBarComponent when present.
+  SearchBar?: ElementType;
+};
+
+/**
+ * Server-safe NavBar. Does NOT import client-only modules (no "use client").
+ * Client-only interactive components (DropdownMenu, MobileNavigation) can be
+ * passed in as props from a client wrapper so the host app controls which
+ * client implementations are used.
+ */
+function NavBarGlobal({ DropdownMenu, MobileNavigation, SiteSearchBarComponent, SearchBar }: NavBarGlobalProps) {
   return (
     <div className='relative bg-primary'>
       <header className='text-primary-dark-hover responsive-pad max-w-[1668px] w-full mx-auto'>
         <div className='flex-cb py-1 w-full'>
           <Link href='/' className='block mx-5'>
             <Image
-              src={logoSrc}
+              src={'https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-yellow-bg_ty4arv.jpg'}
               width={90}
               height={90}
               alt='API Freaks logo'
@@ -31,7 +45,7 @@ function NavBarGlobal({ logoSrc = '/logo-black-yellow-bg.jpg' }: NavBarGlobalPro
               className='hidden lg:block'
             />
             <Image
-              src={logoSrc}
+              src={'https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-yellow-bg_ty4arv.jpg'}
               width={70}
               height={70}
               alt='API Freaks logo'
@@ -40,24 +54,38 @@ function NavBarGlobal({ logoSrc = '/logo-black-yellow-bg.jpg' }: NavBarGlobalPro
             />
           </Link>
           <div className='flex-cc gap-1 lg:hidden'>
-            <SiteSearchBarComponent />
-            <MobileNavigationGlobal />
+            {SiteSearchBarComponent && <SiteSearchBarComponent SiteSearchBar={SearchBar} />}
+            {/* Mobile navigation is interactive/client-only. If a client wrapper
+                provides a component it will be rendered here; otherwise we
+                render nothing on the server. */}
+            {MobileNavigation ? <MobileNavigation /> : null}
           </div>
 
           <nav className='hidden lg:flex justify-between gap-0 max-w-[1050px] w-full py-3 px-5 mx-5 bg-white dark:text-soft-white dark:bg-primary-dark rounded-full select-none dark:bg-black dark:hover:text-[#f5f5f5]'>
             <ul className='flex-c space-x-8 xl:space-x-10 dark:text-soft-white dark:hover:text-gray-100'>
               {navigationLinksPublic.map((link, index) => {
-                if (link.label === 'Documentation')
-                  return (
+                // If a client DropdownMenu was provided, use it for interactive
+                // dropdowns. Otherwise fall back to a plain Link on the server.
+                if (link.label === 'Documentation') {
+                  return DropdownMenu ? (
                     <DropdownMenu
                       key={index}
                       items={APIDocsUrls}
                       title='Documentation'
                       page={pageUrl(PAGE.APIFreaks)}
                     />
+                  ) : (
+                    <li key={index}>
+                      <Link href={pageUrl(PAGE.APIFreaks)} className='font-bold'>
+                        <div className='flex-cc'>
+                          <p>Documentation</p>
+                        </div>
+                      </Link>
+                    </li>
                   );
-                if (link.label === 'Tools')
-                  return (
+                }
+                if (link.label === 'Tools') {
+                  return DropdownMenu ? (
                     <DropdownMenu
                       key={index}
                       items={toolsUrls}
@@ -66,7 +94,17 @@ function NavBarGlobal({ logoSrc = '/logo-black-yellow-bg.jpg' }: NavBarGlobalPro
                       className='-translate-x-[20rem]'
                       linkPrefetch={false}
                     />
+                  ) : (
+                    <li key={index}>
+                      <Link href={pageUrl(PAGE.Tools)} className='font-bold'>
+                        <div className='flex-cc'>
+                          <p>Tools</p>
+                        </div>
+                      </Link>
+                    </li>
                   );
+                }
+
                 return (
                   <li key={index}>
                     <Link
@@ -86,7 +124,7 @@ function NavBarGlobal({ logoSrc = '/logo-black-yellow-bg.jpg' }: NavBarGlobalPro
             <div className='flex-cb gap-4 font-bold'>
               <div className='ml-2'>
                 {' '}
-                <SiteSearchBarComponent />{' '}
+                {SiteSearchBarComponent && <SiteSearchBarComponent SiteSearchBar={SearchBar} />}{' '}
               </div>
               <Link
                 className='hover:text-black dark:text-soft-white dark:hover:text-soft-white'
