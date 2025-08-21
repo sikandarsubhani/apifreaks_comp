@@ -5,7 +5,7 @@ type NoPrefetchLinkProps = {
   href: string;
   children: ReactNode;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 function NoPrefetchLink({

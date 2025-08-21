@@ -8,13 +8,13 @@ export const PER_EXTRA_MEMBER_COST = 5;
 
 export const FREE_CREDITS = 10000;
 
-export const enum TAG {
+export enum TAG {
   Blog = 'blog',
   Tutorial = 'tutorial',
   Guide = 'guide',
 }
 
-export const enum PAGE {
+export enum PAGE {
   HomePage = 'home',
   GeoCurrencyConverter = 'geo-localized-currency-conversion',
   CurrencySymbolsTest = 'currency-symbols-test',

@@ -122,7 +122,7 @@ function getSystemTheme(): THEME.Light | THEME.Dark {
   }
   return THEME.Light;
 }
-
+// ts-ignore-next-line
 function ResponsiveIcon({ Icon, ...props }: { Icon: React.ComponentType<any>;[key: string]: any }) {
   const [isSmall, setIsSmall] = useState(false);
   useEffect(() => {

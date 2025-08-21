@@ -2530,10 +2530,7 @@ export function ScreenshotIcon({
 export function HtmlIcon({
   width = '30px',
   height = '30px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       fill='#393939'
@@ -2568,10 +2565,7 @@ export function HtmlIcon({
 export function CssIcon({
   width = '30px',
   height = '30px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       fill='#393939'
@@ -2633,10 +2627,7 @@ export function CssIcon({
 export function JavascriptIcon({
   width = '30px',
   height = '30px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       fill='#393939'
@@ -2688,10 +2679,7 @@ export function JavascriptIcon({
 export function JsonIcon({
   width = '30px',
   height = '30px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       fill='#393939'
@@ -2748,11 +2736,13 @@ export function JsonIcon({
   );
 }
 
-export function SqlIcon() {
+export function SqlIcon(
+  { width = '32px', height = '32px' }: IconSizeProps
+) {
   return (
     <svg
-      width={32}
-      height={32}
+      width={width}
+      height={height}
       viewBox='0 0 16 16'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
@@ -2777,10 +2767,7 @@ export function SqlIcon() {
 export function SvgIcon({
   width = '40px',
   height = '40px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       width={width}
@@ -2808,7 +2795,7 @@ export function SvgIcon({
   );
 }
 
-export function XmlIcon({ width, height }: { width: string; height: string }) {
+export function XmlIcon({ width = '30', height = '30' }: IconSizeProps) {
   return (
     <svg
       height={width}
@@ -2881,10 +2868,7 @@ export function XmlIcon({ width, height }: { width: string; height: string }) {
 export function TextIcon({
   width = '40px',
   height = '40px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       height={width}
@@ -2981,10 +2965,7 @@ export function TextIcon({
 export function DiffCheckIcon({
   width = '24px',
   height = '24px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -3000,12 +2981,13 @@ export function DiffCheckIcon({
     </svg>
   );
 }
-export function RotateIcon() {
+export function RotateIcon(
+  { width = '24px', height = '24px' }: IconSizeProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width={24}
-      height={24}
+      width={width}
+      height={height}
       viewBox='0 0 24 24'
       aria-label='Rotate Icon'
     >
@@ -3017,12 +2999,13 @@ export function RotateIcon() {
   );
 }
 
-export function CropIcon() {
+export function CropIcon(
+  { width = '24px', height = '24px' }: IconSizeProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width={22}
-      height={22}
+      width={width}
+      height={height}
       viewBox='0 0 24 24'
       aria-label='Crop Icon'
     >
@@ -3037,10 +3020,7 @@ export function CropIcon() {
 export function YamlIcon({
   width = '40px',
   height = '40px',
-}: {
-  width?: string;
-  height?: string;
-}) {
+}: IconSizeProps) {
   return (
     <svg
       width={width}
@@ -3071,29 +3051,40 @@ export function YamlIcon({
     </svg>
   );
 }
-export function EmailIcon() {
-  return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='32'
-      height='32'
-      viewBox='0 0 16 16'
-    >
-      <path
-        fill='#454343'
-        d='M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2M1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z'
-      />
-    </svg>
-  );
-}
-
-export function ScraperApiIcon() {
+export function EmailIcon({
+  width = '32px',
+  height = '32px',
+}: IconSizeProps
+) {
   return (
     <>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        width='32'
-        height='32'
+        width={width}
+        height={height}
+        viewBox='0 0 16 16'
+      >
+        <path
+          fill='#454343'
+          d='M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2M1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z'
+        />
+      </svg>
+    </>
+  );
+}
+
+export function ScraperApiIcon(
+  {
+    width = '32px',
+    height = '32px',
+  }: IconSizeProps
+) {
+  return (
+    <>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width={width}
+        height={height}
         viewBox='0 0 32 32'
         fill='currentColor'
       >
@@ -3104,12 +3095,14 @@ export function ScraperApiIcon() {
   );
 }
 
-export function VATIcon() {
+export function VATIcon(
+  { width = '40px', height = '40px' }: IconSizeProps = {}
+) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='40'
-      height='40'
+      width={width}
+      height={height}
       viewBox='0 0 40 40'
       fill='currentColor'
     >
@@ -3119,6 +3112,23 @@ export function VATIcon() {
   );
 }
 
+export function EmailWithSearchIcon(
+  { width = '24px', height = '24px' }: IconSizeProps
+) {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width={width}
+      height={height}
+      viewBox='0 0 24 24'
+    >
+      <path
+        fill='currentColor'
+        d='M16.5 11c2.5 0 4.5 2 4.5 4.5c0 .88-.25 1.71-.69 2.4l3.08 3.1L22 22.39l-3.12-3.07c-.69.43-1.51.68-2.38.68c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5m0 2a2.5 2.5 0 0 0 0 5a2.5 2.5 0 0 0 0-5m-6 5H3V8l7.62 4.76A6.49 6.49 0 0 1 16.5 9c.27 0 .54 0 .81.06L19 8v1.5c.75.31 1.42.77 2 1.32V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h8.82c-.55-.58-1-1.25-1.32-2M19 6l-8 5l-8-5z'
+      ></path>
+    </svg>
+  );
+}
 export function DarkModeIcon({
   width = '1.5em',
   height = '1.5em',

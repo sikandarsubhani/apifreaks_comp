@@ -4,11 +4,13 @@ import { PAGE, TAG } from '../../../utils/constants';
 import { contentApi } from '../../../utils/ghost-api-clients';
 import {
   productsCategories,
-  productsCategoriesTestPages, SwaggerCatelogue, toolsLinks
+  productsCategoriesTestPages,
+  SwaggerCatelogue
 } from '../../../utils/navigation-links';
 import { absoluteUrl, pageUrl } from '../../../utils/utils';
 // import SiteSearchBar from './SearchBar';
 import { ElementType } from 'react';
+import { toolsLinks } from '../../../utils/tools-navigation';
 
 //This component is cached by default and can be revalidated whenever the cache is invalidated, by the tags defined, in the environment where it is used.
 const dynamicResourcesPages = unstable_cache(
@@ -29,7 +31,7 @@ const dynamicResourcesPages = unstable_cache(
   ['ghost-resources'],
   {
     tags: ['ghost-resources'],
-    // revalidate: 20, //* 60 * 24, //Revalidate After One Day,
+    revalidate: 20, //* 60 * 24,  //Revalidate After One Day,
   }
 );
 const apidocs = productsCategories
@@ -148,7 +150,7 @@ const otherPublicPages: Array<SearchBarPage> = [
 
 const seen = new Set<string>();
 
-const toolsPages = toolsLinks.flatMap(section =>
+const toolsPages: SearchBarPage[] = toolsLinks.flatMap(section =>
   section.items.flatMap(tool => {
     if (seen.has(tool.link)) return [];
     seen.add(tool.link);
@@ -157,7 +159,7 @@ const toolsPages = toolsLinks.flatMap(section =>
       tag: 'Tools',
       path: tool.link,
       title: tool.title,
-      content: tool.description,
+      content: tool.description, // Ensure content is always a string
     };
   })
 );
@@ -170,6 +172,7 @@ export default async function SiteSearchBarComponent({ SiteSearchBar }: SiteSear
   let guidePages: SearchBarPage[] = [];
 
   try {
+    console.log('Loading dynamic pages...');
     const blogs = await dynamicResourcesPages(TAG.Blog, PAGE.Blog);
     blogPages =
       blogs?.map(page => ({

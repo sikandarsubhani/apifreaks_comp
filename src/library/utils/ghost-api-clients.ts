@@ -54,7 +54,7 @@ export function getContentApi() {
         return { data };
       },
     });
-  } catch (e) {
+  } catch {
     // If @tryghost/content-api is not installed, create a stub
     _contentApi = missingPkgFactory('@tryghost/content-api');
   }
@@ -73,7 +73,7 @@ export function getAdminApi() {
       key: process.env.GHOST_ADMIN_API_KEY!,
       version: 'v5.0',
     });
-  } catch (e) {
+  } catch {
     _adminApi = missingPkgFactory('@tryghost/admin-api');
   }
 

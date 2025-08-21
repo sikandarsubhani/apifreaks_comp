@@ -9,20 +9,15 @@ import {
   BulkWhoIsLookupIcon,
   CommodityIcon,
   ConvertIcon,
-  CssIcon,
   CurrencyExchangeIcon,
-  DiffCheckIcon,
   DNSIcon,
   DomainIcon,
   FluctuationIcon,
   HistoricalCurrencyConverterIcon,
   HistoricIcon,
   HomeIcon,
-  HtmlIcon,
   IPIcon,
   IpLocationLookupIcon,
-  JavascriptIcon,
-  JsonIcon,
   KeyIcon,
   LocalCurrencyIcon,
   MailIcon,
@@ -30,12 +25,9 @@ import {
   ReverseIcon,
   ScraperApiIcon,
   ScreenshotIcon,
-  SqlIcon,
   SSLCertificateChainLookupIcon,
   SSLIcon,
   SuggestIcon,
-  SvgIcon,
-  TextIcon,
   TimeSeriesIcon,
   TimeZoneConvertIcon,
   TimeZoneIcon,
@@ -43,12 +35,10 @@ import {
   VATIcon,
   WhoIsHistoricalLookupIcon,
   WhoIsLookupIcon,
-  XmlIcon,
-  YamlIcon,
 } from '../../library/icons/Icons';
-import { ProductCategory, ProductsCategoriesTestPages } from '../../library/types/types';
-import { PAGE, TOOL_PAGE } from './constants';
-import { pageUrl, toolPageUrl } from './utils';
+import { ProductCategory, ProductsCategoriesTestPages, } from '../../library/types/types';
+import { PAGE } from './constants';
+import { pageUrl } from './utils';
 
 export const apiList: Array<ProductCategory> = [
   {
@@ -444,146 +434,6 @@ export const APIDocsUrls = apiList
 export const HomePageAPICatalogue = apiList.filter(
   api => !['General'].includes(api.heading)
 );
-
-export const toolsUrls = [
-  {
-    title: 'Formatters & Beautifiers',
-    link: `${pageUrl(PAGE.Tools)}#formatters-beautifiers`,
-  },
-  {
-    title: 'Converters & Optimizers',
-    link: `${pageUrl(PAGE.Tools)}#converters-optimizers`,
-  },
-  {
-    title: 'Viewers & Validators',
-    link: `${pageUrl(PAGE.Tools)}#viewers-validators`,
-  },
-];
-
-export const toolsLinks = [
-  {
-    category: 'Formatters & Beautifiers',
-    id: 'web-tools',
-    items: [
-      {
-        title: 'Online HTML Formatter, HTML Beautifier and HTML Viewer',
-        link: toolPageUrl(TOOL_PAGE.HTMLFormatter),
-        logo: HtmlIcon,
-        description:
-          'Easily format HTML with customizable indentation levels, minify HTML, and preview your content by uploading files.',
-      },
-      {
-        title: 'Free CSS Minifier & CSS Formatter Online',
-        link: toolPageUrl(TOOL_PAGE.CSSMinifier),
-        logo: CssIcon,
-        description:
-          'Optimize your CSS for faster load times and cleaner code with our free CSS Minifier and CSS Formatter.',
-      },
-      {
-        title: 'Minify, Compress, and Beautify JavaScript Code Online',
-        link: toolPageUrl(TOOL_PAGE.JSMinifier),
-        logo: JavascriptIcon,
-        description:
-          'Easily compress, minify, and format JavaScript code to enhance readability and performance.',
-      },
-      {
-        title: 'Free Online SQL Beautifier & Minifier',
-        link: toolPageUrl(TOOL_PAGE.SQLFormatter),
-        logo: SqlIcon,
-        description:
-          'Format and structure SQL queries for better readability and maintenance.',
-      },
-      {
-        title: 'View, Format, Minify, and Validate JSON Online',
-        link: toolPageUrl(TOOL_PAGE.JSONFormatter),
-        logo: JsonIcon,
-        description:
-          'Beautify, minify, validate, and view JSON data with an easy-to-navigate structure.',
-      },
-      {
-        title: 'Free XML Beautifier, XML Minifier, and XML Validator Online',
-        link: toolPageUrl(TOOL_PAGE.XMLFormatter),
-        logo: JsonIcon,
-        description:
-          'Format, minify, and validate XML data for improved readability and efficiency.',
-      },
-    ],
-  },
-  {
-    category: 'Converters & Optimizers',
-    id: 'data-file-processing',
-    items: [
-      {
-        title: 'Free & Fast XML2JSON Online Tool',
-        link: toolPageUrl(TOOL_PAGE.XMLtoJSONConverter),
-        logo: () => XmlIcon({ width: '30', height: '30' }),
-        description:
-          'Convert XML to JSON quickly and efficiently with customizable formatting options.',
-      },
-      {
-        title: 'Remove Whitespace, Change Text Case & Replace Text Online',
-        link: toolPageUrl(TOOL_PAGE.CaseConverter),
-        logo: TextIcon,
-        description:
-          'Transform text by changing case, removing whitespace, and replacing characters efficiently.',
-      },
-      {
-        title: 'Online Diff Checker',
-        link: toolPageUrl(TOOL_PAGE.DiffChecker),
-        logo: DiffCheckIcon,
-        description:
-          'Compare text, code, and files instantly with our online diff checker tool — ideal for spotting differences and changes with ease and accuracy.',
-      },
-    ],
-  },
-  {
-    category: 'Viewers & Validators',
-    id: 'text-content-utilities',
-    items: [
-      {
-        title: 'Online HTML Formatter, HTML Beautifier and HTML Viewer',
-        link: toolPageUrl(TOOL_PAGE.HTMLFormatter),
-        logo: HtmlIcon,
-        description:
-          'Easily format HTML with customizable indentation levels, minify HTML, and preview your content by uploading files.',
-      },
-      {
-        title: 'View, Format, Minify, and Validate JSON Online',
-        link: toolPageUrl(TOOL_PAGE.JSONFormatter),
-        logo: JsonIcon,
-        description:
-          'Beautify, minify, validate, and view JSON data with an easy-to-navigate structure.',
-      },
-      {
-        title:
-          'Free SVG File Viewer & Reader – View, Edit & Optimize SVGs Online',
-        link: toolPageUrl(TOOL_PAGE.SVGViewer),
-        logo: SvgIcon,
-        description:
-          'Preview and analyze SVG files with an intuitive online viewer.',
-      },
-      {
-        title: 'Online YAML Validator and YAML Formatter',
-        link: toolPageUrl(TOOL_PAGE.YAMLValidator),
-        logo: YamlIcon({ width: '40px', height: '40px' }),
-        description:
-          'Our online YAML Validator checks for syntax errors and ensuring correct formatting.',
-      },
-      {
-        title: 'Email Header Analyzer',
-        link: toolPageUrl(TOOL_PAGE.EmailHeaderAnalyzer),
-        description:
-          'Analyze full email headers to trace origin, verify SPF/DKIM/DMARC, and detect spam, spoofing, or delivery issues.',
-      },
-      {
-        title: 'Free Online SMTP Checker Tool',
-        link: toolPageUrl(TOOL_PAGE.SMTPChecker),
-        description:
-          'Quickly test SMTP connections, ports, and authentication. Diagnose email delivery issues and simulate sending—all in one easy tool.',
-      },
-    ],
-  },
-];
 
 export const productsCategoriesTestPages: Array<ProductsCategoriesTestPages> = [
   {
@@ -1191,14 +1041,6 @@ export const navigationLinksPublic: Array<{ href: string; label: string }> = [
   { href: pageUrl(PAGE.APIFreaks), label: 'Documentation' },
   { href: pageUrl(PAGE.APIPlansPricingOneOff), label: 'Pricing' },
   { href: pageUrl(PAGE.Resources), label: 'Resources' },
-  { href: pageUrl(PAGE.Tools), label: 'Tools' },
-  { href: pageUrl(PAGE.ContactUs), label: 'Contact us' },
-];
-
-export const navigationLinksPrivate: Array<{ href: string; label: string }> = [
-  { href: pageUrl(PAGE.APIFreaks), label: 'Documentation' },
-  { href: pageUrl(PAGE.Resources), label: 'Resources' },
-  { href: pageUrl(PAGE.CreditsUsageApiTest), label: 'Try APIs' },
   { href: pageUrl(PAGE.Tools), label: 'Tools' },
   { href: pageUrl(PAGE.ContactUs), label: 'Contact us' },
 ];

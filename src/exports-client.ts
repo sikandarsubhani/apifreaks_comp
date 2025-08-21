@@ -17,4 +17,5 @@ export * from "./library/hooks/hook";
 export * from "./library/utils/ghost-api-clients";
 
 export { default as ThemeProvider } from "./library/components/dark-mode/ThemeProvider";
+export * from "./library/components/dark-mode/ThemeProvider";
 export { default as DarkModeToggle } from "./library/components/dark-mode/DarkModeToggle";

@@ -4,10 +4,14 @@ import { FacebookIcon, HeartIcon, LinkedinIcon, TwitterIcon } from '../../icons/
 import '../../styles/globals.css'; // Ensure global styles are imported
 import { pageUrl } from '../../utils/utils';
 import { PAGE } from '../../utils/constants';
-import { APIDocsUrls, toolsUrls } from '../../utils/navigation-links';
+import { APIDocsUrls } from '../../utils/navigation-links';
 import NoPrefetchLink from '../common/NoPrefetchLink';
+import { toolsCategories } from '../../utils/tools-navigation';
 
-export function Footer() {
+type FooterProps = {
+  logosrc?: string;
+};
+export function Footer({ logosrc = 'https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-bg-small_uadg5k.jpg' }: FooterProps) {
   return (
     <>
       <footer className='@container bg-black text-white responsive-pad overflow-hidden'>
@@ -29,7 +33,7 @@ export function Footer() {
               <div className='flex flex-col justify-center space-y-3'>
                 <Link href='/' className='mx-auto'>
                   <Image
-                    src='https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-bg-small_uadg5k.jpg'
+                    src={logosrc}
                     width={120}
                     height={120}
                     alt='APIFreaks'
@@ -74,7 +78,7 @@ export function Footer() {
                     Tools Catalog
                   </h3>
                   <ul className='space-y-1'>
-                    {toolsUrls.map(api => (
+                    {toolsCategories.map(api => (
                       <li key={api.title}>
                         <NoPrefetchLink href={api.link}>
                           {api.title}

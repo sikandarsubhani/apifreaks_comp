@@ -1,8 +1,8 @@
+import { toolsCategories } from '../../utils/tools-navigation';
 import { PAGE } from '../../utils/constants';
 import {
   APIDocsUrls,
   navigationLinksPublic,
-  toolsUrls,
 } from '../../utils/navigation-links';
 import { pageUrl } from '../../utils/utils';
 import Image from 'next/image';
@@ -15,29 +15,27 @@ type SiteSearchBarComponentProps = {
 };
 
 type NavBarGlobalProps = {
-  // Client components may be passed in by a client-side wrapper.
+  logosrc?: string;
   DropdownMenu?: ElementType;
   MobileNavigation?: ElementType;
   SiteSearchBarComponent?: ElementType<SiteSearchBarComponentProps>;
-  // Optional client SearchBar implementation passed through to the
-  // SiteSearchBarComponent when present.
   SearchBar?: ElementType;
 };
 
-/**
- * Server-safe NavBar. Does NOT import client-only modules (no "use client").
- * Client-only interactive components (DropdownMenu, MobileNavigation) can be
- * passed in as props from a client wrapper so the host app controls which
- * client implementations are used.
- */
-function NavBarGlobal({ DropdownMenu, MobileNavigation, SiteSearchBarComponent, SearchBar }: NavBarGlobalProps) {
+function NavBarGlobal({
+  logosrc = 'https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-yellow-bg_ty4arv.jpg',
+  DropdownMenu,
+  MobileNavigation,
+  SiteSearchBarComponent,
+  SearchBar
+}: NavBarGlobalProps) {
   return (
     <div className='relative bg-primary'>
       <header className='text-primary-dark-hover responsive-pad max-w-[1668px] w-full mx-auto'>
         <div className='flex-cb py-1 w-full'>
           <Link href='/' className='block mx-5'>
             <Image
-              src={'https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-yellow-bg_ty4arv.jpg'}
+              src={logosrc}
               width={90}
               height={90}
               alt='API Freaks logo'
@@ -45,7 +43,7 @@ function NavBarGlobal({ DropdownMenu, MobileNavigation, SiteSearchBarComponent, 
               className='hidden lg:block'
             />
             <Image
-              src={'https://res.cloudinary.com/dc5hkrpco/image/upload/v1755631017/logo-black-yellow-bg_ty4arv.jpg'}
+              src={logosrc}
               width={70}
               height={70}
               alt='API Freaks logo'
@@ -55,10 +53,7 @@ function NavBarGlobal({ DropdownMenu, MobileNavigation, SiteSearchBarComponent, 
           </Link>
           <div className='flex-cc gap-1 lg:hidden'>
             {SiteSearchBarComponent && <SiteSearchBarComponent SiteSearchBar={SearchBar} />}
-            {/* Mobile navigation is interactive/client-only. If a client wrapper
-                provides a component it will be rendered here; otherwise we
-                render nothing on the server. */}
-            {MobileNavigation ? <MobileNavigation /> : null}
+            {MobileNavigation && <MobileNavigation />}
           </div>
 
           <nav className='hidden lg:flex justify-between gap-0 max-w-[1050px] w-full py-3 px-5 mx-5 bg-white dark:text-soft-white dark:bg-primary-dark rounded-full select-none dark:bg-black dark:hover:text-[#f5f5f5]'>
@@ -88,7 +83,7 @@ function NavBarGlobal({ DropdownMenu, MobileNavigation, SiteSearchBarComponent, 
                   return DropdownMenu ? (
                     <DropdownMenu
                       key={index}
-                      items={toolsUrls}
+                      items={toolsCategories}
                       title='Tools'
                       page={pageUrl(PAGE.Tools)}
                       className='-translate-x-[20rem]'

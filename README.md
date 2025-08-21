@@ -525,6 +525,26 @@ npm run clean            # Remove dist directory
 └── package.json                  # Package configuration
 ```
 
+## Tweaks
+
+### Lint Specific Directories
+
+```bash
+npx eslint "src/library/**/*.{ts,tsx}" --max-warnings=0
+```
+
+### Automatically Fix Problems
+
+```bash
+npx eslint "src/**/*.{ts,tsx}" --fix
+```
+
+### Get More Detailed Output
+
+```bash
+npx eslint "src/**/*.{ts,tsx}" --format stylish
+```
+
 ## License
 
 MIT
