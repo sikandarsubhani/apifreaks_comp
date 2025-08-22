@@ -83,7 +83,7 @@
   }
 }
 
-.custom-bullets {
+/* .custom-bullets {
   @apply list-disc space-y-5 pl-8 text-[16px];
 }
 
@@ -93,4 +93,4 @@
 
 .custom-alpha {
   @apply space-y-5 list-[lower-alpha] pl-8 text-[16px];
-}
+} */

@@ -1,200 +1,559 @@
-# @7sikanadar/apifreaks-components
+# @7sikandar/af-nav
 
-A React component library featuring the APIFreaks Footer component and related UI elements, built with Next.js, TypeScript, and Tailwind CSS.
+A comprehensive React component library built for API Freaks projects, featuring navigation components, icons, utilities, and theme management with server-safe and client-only entry points. Designed specifically for Next.js 15+ with React 19+ and Turbopack compatibility.
+
+## Features
+
+- 🚀 **Server-Safe Components** - Navigation components optimized for Next.js Server Components (RSC)
+- 🎨 **Dark Mode Support** - Built-in theme provider with system preference detection
+- 📱 **Mobile-First Navigation** - Responsive navigation with mobile hamburger menu
+- 🔍 **Search Integration** - Search bar components with customizable functionality
+- 🎯 **Rich Icon Library** - 50+ SVG icons for various use cases
+- 🎨 **Pre-built Styles** - Multiple CSS bundles for different page types
+- 📦 **TypeScript Support** - Full TypeScript definitions included
+- 🔧 **Modular Exports** - Split entry points to prevent server/client conflicts
 
 ## Installation
 
 ```bash
-npm install @7sikanadar/apifreaks-components
+npm install @7sikandar/af-nav
 ```
 
 ## Setup
 
-**Important:** To use the components with their styles, you need to import the CSS file in your application. The components are designed to work standalone, whether your host app uses Tailwind CSS or not.
+Import the compiled CSS in your application (layout or app entry):
 
 ```tsx
-// In your main app file (e.g., _app.tsx, layout.tsx, or main.tsx)
-import "@7sikanadar/apifreaks-components/styles";
+// In your app root (app/layout.tsx or _app.tsx)
+import "@7sikandar/af-nav/styles";
 ```
 
-Or you can import the specific CSS file:
+### Available Style Imports
 
 ```tsx
-import "@7sikanadar/apifreaks-components/styles/af-components.css";
+// Main styles bundle (recommended)
+import "@7sikandar/af-nav/styles";
+
+// Individual style bundles
+import "@7sikandar/af-nav/styles/globals.css";    // Global styles
+import "@7sikandar/af-nav/styles/blog.css";       // Blog page styles
+import "@7sikandar/af-nav/styles/public-pages.css"; // Public page styles
+import "@7sikandar/af-nav/styles/jsoneditor.css"; // JSON editor styles
 ```
 
-## Components
+## Architecture & Entry Points
 
-### Footer Versions
+This package exposes two main entrypoints to prevent server components from accidentally importing client-only code:
 
-This package provides two Footer component versions:
+- **`@7sikandar/af-nav`** — Server-safe exports (Footer, NavbarGlobal, icons, utils, types)
+- **`@7sikandar/af-nav/client`** — Client-only exports (hooks, context, interactive components)
 
-1. **Default Footer (`Footer`)** - Uses container queries for responsive design.
+### Server-Safe Components
+
+Components that can be imported and used in Next.js Server Components:
+
+- `Footer` - Complete footer component with social links
+- `NavbarGlobal` - Main navigation bar (accepts client components as props)
+- `SiteSearchBarComponent` - Server-rendered search bar wrapper
+- `NotFound` - 404 error page component
+- `NoPrefetchLink` - Link component without prefetching
+- All icons (50+ SVG components)
+- Utility functions and types
+
+### Client-Only Components
+
+Components that require `"use client"` and must be imported from `/client`:
+
+- `ThemeProvider` - Dark/light mode context provider
+- `DarkModeToggle` - Theme switching button
+- `DropDownMenu` - Interactive dropdown menu
+- `MobileNavigation` - Mobile hamburger menu
+- `SiteSearchBar` - Interactive search input
+- `useTheme` hook - Theme management hook
+
+## Component Documentation
+
+### Navigation Components
+
+#### NavbarGlobal
+Main navigation component that accepts client components as props for server-side composition.
 
 ```tsx
-import { Footer } from "@7sikanadar/apifreaks-components";
+// Server Component usage
+import { NavbarGlobal, SiteSearchBarComponent } from "@7sikandar/af-nav";
 
-function App() {
+<NavbarGlobal SiteSearchBarComponent={SiteSearchBarComponent} />
+```
+
+#### Footer
+Complete footer with social media links and company information.
+
+```tsx
+import { Footer } from "@7sikandar/af-nav";
+
+<Footer />
+```
+
+#### MobileNavigation (Client-only)
+Responsive mobile navigation with hamburger menu.
+
+```tsx
+"use client";
+import { MobileNavigation } from "@7sikandar/af-nav/client";
+
+<MobileNavigation />
+```
+
+### Theme Components
+
+#### ThemeProvider (Client-only)
+Provides theme context for dark/light mode switching.
+
+```tsx
+"use client";
+import { ThemeProvider } from "@7sikandar/af-nav/client";
+
+export default function App({ children }) {
   return (
-    <div className="@container">
-      <Footer />
-    </div>
+    <ThemeProvider>
+      {children}
+    </ThemeProvider>
   );
 }
 ```
 
-2. **Modern Footer (`ModernFooter`)** - Uses standard Tailwind responsive classes (Recommended for better compatibility).
+#### DarkModeToggle (Client-only)
+Button component for switching between themes.
 
 ```tsx
-import { ModernFooter } from "@7sikanadar/apifreaks-components";
+"use client";
+import { DarkModeToggle } from "@7sikandar/af-nav/client";
 
-function App() {
-  return <ModernFooter logoSrc="/path/to/logo.jpg" logoAlt="Company Logo" />;
-}
+<DarkModeToggle />
 ```
 
-### ModernFooter Props
+### Search Components
 
-The ModernFooter component accepts the following props:
+#### SiteSearchBar (Client-only)
+Interactive search input with keyboard shortcuts and autocomplete.
 
 ```tsx
-interface ModernFooterProps {
-  logoSrc?: string;      // Default: '/img/logo-black-bg-small.jpg'
-  logoAlt?: string;      // Default: 'APIFreaks'
-  logoWidth?: number;    // Default: 120
-  logoHeight?: number;   // Default: 120
-}
+"use client";
+import { SiteSearchBar } from "@7sikandar/af-nav/client";
+
+<SiteSearchBar placeholder="Search..." />
 ```
 
-### Footer
+### Interactive Components
 
-The main APIFreaks footer component with social media links, navigation sections, and company information.
-
-#### Original Footer (with Container Queries)
-
-The original Footer component uses container queries and custom utility classes.
+#### DropDownMenu (Client-only)
+Customizable dropdown menu with keyboard navigation.
 
 ```tsx
-import { Footer } from "@7sikanadar/apifreaks-components";
+"use client";
+import { DropDownMenu } from "@7sikandar/af-nav/client";
 
-function App() {
-  return (
-    <div className="@container">
-      {/* Your app content */}
-      <Footer />
-    </div>
-  );
-}
+const menuItems = [
+  { title: 'Home', link: '/' },
+  { title: 'About', link: '/about' },
+  { title: 'Contact', link: '/contact' }
+];
+
+<DropDownMenu title="Menu" items={menuItems} />
 ```
 
-#### Modern Footer (Standard Tailwind) - Recommended
+### Icon Library
 
-The modern version uses standard Tailwind CSS classes for better compatibility.
+The package includes 50+ SVG icons optimized for web use:
+
+#### Social Media Icons
+- `FacebookIcon`
+- `TwitterIcon`
+- `LinkedinIcon`
+- `GithubIcon`
+
+#### Navigation Icons
+- `HamburgerIcon`
+- `CrossIcon`
+- `DropDownIcon`
+- `LeftArrowIcon`
+
+#### UI Icons
+- `UserIcon`
+- `LockIcon`
+- `MailIcon`
+- `HomeIcon`
+- `SearchIcon`
+
+#### Status Icons
+- `TickIcon`
+- `ErrorIcon`
+- `DeleteIcon`
+- `EditIcon`
+
+#### Specialized Icons
+- `DNSIcon`
+- `SSLIcon`
+- `CurrencyExchangeIcon`
+- `DomainIcon`
+
+#### Icon Usage
+
+All icons accept `width` and `height` props:
 
 ```tsx
-import { ModernFooter } from "@7sikanadar/apifreaks-components";
-
-function App() {
-  return (
-    <div>
-      {/* Your app content */}
-      <ModernFooter logoSrc="/your-logo.png" logoAlt="Your Company" />
-    </div>
-  );
-}
-```
-
-### Icons
-
-Individual icon components used in the Footer:
-
-```tsx
-import {
-  FacebookIcon,
-  LinkedinIcon,
-  TwitterIcon,
-  HeartIcon,
-} from "@7sikanadar/apifreaks-components";
+import { FacebookIcon, GithubIcon, HeartIcon } from "@7sikandar/af-nav";
 
 function SocialLinks() {
   return (
-    <div>
+    <div className="flex gap-4">
       <FacebookIcon width="24px" height="24px" />
-      <LinkedinIcon width="24px" height="24px" />
-      <TwitterIcon width="24px" height="24px" />
+      <GithubIcon width="24px" height="24px" />
       <HeartIcon width="24px" height="24px" />
     </div>
   );
 }
 ```
 
-### NoPrefetchLink
+## TypeScript Support
 
-A Next.js Link component wrapper that disables prefetching:
+### Available Types
 
 ```tsx
-import { NoPrefetchLink } from "@7sikanadar/apifreaks-components";
+import type {
+  IconSizeProps,
+  ThemeContextType,
+  THEME,
+  SearchBarPage,
+  APIDocumentationItem,
+  ProductCategory
+} from "@7sikandar/af-nav";
 
-function Navigation() {
+// Theme enum
+enum THEME {
+  Light = 'light',
+  Dark = 'dark',
+  System = 'system'
+}
+
+// Icon props
+type IconSizeProps = {
+  width?: string;
+  height?: string;
+};
+```
+
+## Usage Examples
+
+### 1. Basic Server Component Setup
+
+Use server-safe components in a Server Component (no `"use client"` needed):
+
+```tsx
+// app/page.tsx (Next.js Server Component)
+import { Footer, NavbarGlobal, SiteSearchBarComponent } from "@7sikandar/af-nav";
+
+export default function Page() {
   return (
-    <NoPrefetchLink href="/about" className="nav-link">
-      About Us
-    </NoPrefetchLink>
+    <div>
+      <NavbarGlobal SiteSearchBarComponent={SiteSearchBarComponent} />
+      <main>{/* server-rendered content */}</main>
+      <Footer />
+    </div>
   );
 }
 ```
 
-## Styling
+### 2. Client Component Integration
 
-**The package is now standalone!** You don't need to configure Tailwind CSS in your host application. Just import the CSS file and the components will work with their own compiled styles.
+Use client-only components inside a Client Component:
 
 ```tsx
-// This is all you need!
-import "@7sikanadar/apifreaks-components/styles";
-import { ModernFooter } from "@7sikanadar/apifreaks-components";
+// components/HeaderClient.tsx
+"use client";
+import {
+  DropDownMenu,
+  DarkModeToggle,
+  ThemeProvider,
+  MobileNavigation
+} from "@7sikandar/af-nav/client";
+
+const navigationItems = [
+  { title: 'Home', link: '/' },
+  { title: 'API Docs', link: '/docs' },
+  { title: 'Pricing', link: '/pricing' }
+];
+
+export default function HeaderClient() {
+  return (
+    <ThemeProvider>
+      <header className="flex items-center justify-between p-4">
+        <DropDownMenu title="Navigation" items={navigationItems} />
+        <div className="flex items-center gap-4">
+          <DarkModeToggle />
+          <MobileNavigation />
+        </div>
+      </header>
+    </ThemeProvider>
+  );
+}
 ```
 
-### If you want to extend styles (Optional)
+### 3. Icon Usage Examples
 
-If you're using Tailwind CSS in your project and want to extend the component styles, you can include the package in your Tailwind config:
+Icons can be imported from the server entry and used in either environment:
 
-```js
-module.exports = {
-  content: [
-    // ... your content
-    "./node_modules/@7sikanadar/apifreaks-components/**/*.{js,ts,jsx,tsx}",
-  ],
-  // ... rest of config
-};
+```tsx
+import {
+  FacebookIcon,
+  GithubIcon,
+  TwitterIcon,
+  HeartIcon,
+  UserIcon,
+  MailIcon
+} from "@7sikandar/af-nav";
+
+function SocialFooter() {
+  return (
+    <footer className="flex items-center justify-center gap-6 p-8">
+      <a href="https://facebook.com" aria-label="Facebook">
+        <FacebookIcon width="32px" height="32px" />
+      </a>
+      <a href="https://github.com" aria-label="GitHub">
+        <GithubIcon width="32px" height="32px" />
+      </a>
+      <a href="https://twitter.com" aria-label="Twitter">
+        <TwitterIcon width="32px" height="32px" />
+      </a>
+      <span className="flex items-center gap-2">
+        Made with <HeartIcon width="20px" height="20px" /> by API Freaks
+      </span>
+    </footer>
+  );
+}
 ```
 
-## Key Features
+### 4. Complete App Layout Example
 
-- ✅ **Standalone Components**: Works without requiring Tailwind CSS in your host app
-- ✅ **Two Footer Variants**: Choose between container queries or standard responsive design
-- ✅ **Compiled CSS**: All utilities and custom styles are pre-compiled
-- ✅ **TypeScript Support**: Full type definitions included
-- ✅ **Customizable**: Props for logo and other customizations
-- ✅ **Modern Build**: Built with latest Next.js 15 and React 19
+```tsx
+// app/layout.tsx (Server Component)
+import { NavbarGlobal, SiteSearchBarComponent, Footer } from "@7sikandar/af-nav";
+import "@7sikandar/af-nav/styles";
+import ClientProviders from "./components/ClientProviders";
 
-## TypeScript Support
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <NavbarGlobal SiteSearchBarComponent={SiteSearchBarComponent} />
+        <ClientProviders>
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </ClientProviders>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
 
-The package includes full TypeScript support with type definitions.
+```tsx
+// components/ClientProviders.tsx
+"use client";
+import { ThemeProvider } from "@7sikandar/af-nav/client";
 
-## Dependencies
+export default function ClientProviders({ children }) {
+  return (
+    <ThemeProvider>
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+### 5. Theme Management
+
+```tsx
+"use client";
+import { useTheme, THEME } from "@7sikandar/af-nav/client";
+
+function ThemeControls() {
+  const { theme, setTheme, toggleTheme } = useTheme();
+
+  return (
+    <div className="flex gap-2">
+      <button onClick={() => setTheme(THEME.Light)}>
+        Light Mode
+      </button>
+      <button onClick={() => setTheme(THEME.Dark)}>
+        Dark Mode
+      </button>
+      <button onClick={() => setTheme(THEME.System)}>
+        System
+      </button>
+      <button onClick={toggleTheme}>
+        Toggle Theme
+      </button>
+      <span>Current: {theme}</span>
+    </div>
+  );
+}
+```
+
+## Important Implementation Notes
+
+### Client-Only Features
+
+- `ThemeProvider`, `DarkModeToggle`, hooks (e.g. `useTheme`), `DropDownMenu`, `MobileNavigation`, and `SiteSearchBar` are client-only and must be imported from `@7sikandar/af-nav/client` inside a component that starts with `"use client"`.
+- This split prevents server-side evaluation of client-only APIs like `createContext` and avoids Next.js/Turbopack compilation errors.
+
+### Troubleshooting Common Issues
+
+#### "Attempted import error: 'MobileNavigation' is not exported"
+#### "Identifier 'ThemeProvider' has already been declared"
+
+**Root cause:** Importing client-only exports (like `ThemeProvider`, `MobileNavigation`, `SiteSearchBar`) directly from a Server Component (e.g. `app/layout.tsx` without `"use client"`) will cause Next.js to attempt to evaluate client-only modules during server compilation, or will result in duplicate symbol declarations when both server and client entrypoints export the same symbol name in different bundles.
+
+**Fix pattern:** Keep server components importing only from the server entry (`@7sikandar/af-nav`) and import client-only pieces from `@7sikandar/af-nav/client` inside a component that uses `"use client"`.
+
+### Recommended Layout Approach
+
+Use Server Components + small Client wrapper pattern:
+
+1. **Keep your root layout as a Server Component** and import `NavbarGlobal` and `SiteSearchBarComponent` from the server entry.
+
+2. **Create a small client component** that imports and wraps any client-only providers or components from `@7sikandar/af-nav/client` (for example `ThemeProvider`, `MobileNavigation`, `SiteSearchBar`, `DropDownMenu`).
+
+3. **Use the client wrapper inside your layout** where a client boundary is needed:
+
+```tsx
+// app/layout.tsx (Server Component)
+import { NavbarGlobal, SiteSearchBarComponent } from "@7sikandar/af-nav";
+import ClientProviders from "./components/ClientProviders";
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <NavbarGlobal SiteSearchBarComponent={SiteSearchBarComponent} />
+        {/* mount client-only providers in a client boundary */}
+        <ClientProviders>{children}</ClientProviders>
+      </body>
+    </html>
+  );
+}
+```
+
+```tsx
+// components/ClientProviders.tsx
+"use client";
+import { ThemeProvider } from "@7sikandar/af-nav/client";
+
+export default function ClientProviders({ children }) {
+  return (
+    <ThemeProvider>
+      {children}
+    </ThemeProvider>
+  );
+}
+```
+
+If you continue to see missing export errors, ensure your host app has installed the package version that includes the client entry (rebuild & pack locally with `npm run build:package && npm pack`).
+
+## Compatibility
 
 - React 19+
 - Next.js 15+
-- Tailwind CSS (for styling)
+
+## Development & Building
+
+### Building the Package
+
+If you develop locally, run the build for the package and publish or pack:
+
+```bash
+npm run build:package  # Builds components and styles
+npm pack              # Creates 7sikandar-af-nav-0.1.0.tgz
+```
+
+### Local Testing
+
+Install the tarball in consuming apps for local testing:
+
+```bash
+npm i /path/to/7sikandar-af-nav-0.1.0.tgz
+```
+
+### Available Scripts
+
+```bash
+npm run dev              # Start development server with Turbopack
+npm run build            # Build Next.js application
+npm run lint             # Run ESLint
+npm run build:css        # Build CSS bundles
+npm run build:package    # Build package for distribution
+npm run clean            # Remove dist directory
+```
+
+## Package Structure
+
+```
+@7sikandar/af-nav/
+├── dist/                          # Built package
+│   ├── exports-server.mjs         # Server-safe entry point
+│   ├── exports-client.mjs         # Client-only entry point
+│   ├── af-components.css          # Main styles bundle
+│   ├── globals.css               # Global styles
+│   ├── blog.css                  # Blog-specific styles
+│   ├── public-pages.css          # Public page styles
+│   └── jsoneditor.css            # JSON editor styles
+├── src/
+│   ├── library/
+│   │   ├── components/           # React components
+│   │   │   ├── navigation/       # Nav, Footer, Search
+│   │   │   ├── dark-mode/        # Theme components
+│   │   │   └── common/           # Shared components
+│   │   ├── icons/                # SVG icon components
+│   │   ├── hooks/                # Custom React hooks
+│   │   ├── styles/               # CSS source files
+│   │   ├── types/                # TypeScript definitions
+│   │   ├── utils/                # Utility functions
+│   │   └── assets/               # Static assets
+│   ├── exports-server.ts         # Server entry exports
+│   └── exports-client.ts         # Client entry exports
+└── package.json                  # Package configuration
+```
+
+## Tweaks
+
+### Lint Specific Directories
+
+```bash
+npx eslint "src/library/**/*.{ts,tsx}" --max-warnings=0
+```
+
+### Automatically Fix Problems
+
+```bash
+npx eslint "src/**/*.{ts,tsx}" --fix
+```
+
+### Get More Detailed Output
+
+```bash
+npx eslint "src/**/*.{ts,tsx}" --format stylish
+```
 
 ## License
 
 MIT
 
+## Repository
+
+[GitHub Repository](https://github.com/sikandarsubhani/apifreaks_comp)
+
 ## Author
 
-sikanadar
-
-# apifreaks_comp
-
-# apifreaks_comp
+**Sikandar Subhani**
+API Freaks Components

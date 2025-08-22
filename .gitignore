@@ -19,6 +19,9 @@
 
 # production
 /build
+# cache
+/.cache
+/.parcel-cache
 
 # misc
 .DS_Store
@@ -39,3 +42,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# zip
+*.zip
+*.tgz
+*.tar
